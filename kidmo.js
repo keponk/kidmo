@@ -25,61 +25,41 @@ var img_arr12 = [ "tumblr_nt00qwSr1E1rsdpaso1_500.gif", "tumblr_nt186kVLDn1rsdpa
 /* START */
 var imgElement = document.getElementById("image");
 var dir = 'images/';
-var image_index = 0;
 var images = img_arr1.concat(img_arr2).concat(img_arr3).concat(img_arr4).concat(img_arr5).concat(img_arr6).concat(img_arr7).concat(img_arr8).concat(img_arr9).concat(img_arr10).concat(img_arr11).concat(img_arr12);
 
-function set_body_height() { // set body height = window height
-    console.log("set body height was called");
-    $('body').height($(window).height());
+function getWidth(){
+    return(window.innerWidth)?
+    window.innerWidth:
+    document.documentElement.clientWidth||document.body.clientWidth||0;
+}
+
+function getHeight(){
+    return(window.innerHeight)?
+    window.innerHeight:
+    document.documentElement.clientHeight||document.body.clientHeight||0;
 }
 
 function changeImage() {
     console.log(imgElement.src);
-    console.log("image_index: " + image_index);
     var rnd = Math.floor(Math.random() * (images.length));
     console.log("random: " + rnd);
+
+
+    var w = getWidth();
+    var h = getHeight();
+    console.log("width: " + w + "; height: " + h);
+    imgElement.height = h - 40;
     var imgsrc = dir + images[rnd];
-    var imgw = preloader(imgsrc).naturalWidth;
-    console.log("WIDTH: " + imgw);
-
-    imgElement.src = preloader(imgsrc).src;
-    image_index++;
-    if (image_index >= images.length) {
-        image_index = 0;
-    }
-}
-
-function preloader(url) {
-    var img = new Image();
-    img.src = url;
-    return img;
-}
-
-function setImageSize() {
-
-    var i = document.getElementById('image');
-    var iw = i.width;
-    var ih = i.height;
-    console.log("image width: "+iw+"; image height: "+ih);
+    imgElement.src = imgsrc;
+    console.log("current: " + imgElement.src);
 }
 
 $(document).ready(function(){
-    var w = $(window).width();
-    var h = $(window).height();
-    console.log("width: " + w + "; height: " + h);
-
-
-    //$(window).bind('resize', set_body_height);
     changeImage();
-    setImageSize();
 
     setInterval ( function() {
-
         changeImage();
-        setImageSize();
-
     }, 4000 );
-
 });
 
 
