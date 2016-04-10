@@ -23,36 +23,62 @@ var img_arr11 = [ "tumblr_ng0vjcQkz71rsdpaso1_500.gif", "tumblr_ngdcprIqtU1rsdpa
 var img_arr12 = [ "tumblr_nt00qwSr1E1rsdpaso1_500.gif", "tumblr_nt186kVLDn1rsdpaso1_500.gif", "tumblr_nt18717GBw1uacq42o1_400.gif", "tumblr_nt1iyswZY51rsdpaso1_500.gif", "tumblr_ntchxqlW0o1rsdpaso1_500.gif", "tumblr_ntjk9hClIP1rsdpaso1_500.gif", "tumblr_ntp6seIoMy1rsdpaso1_500.gif", "tumblr_ntpb70VcPz1rsdpaso1_500.gif", "tumblr_ntqzhuy7As1uacq42o1_500.gif", "tumblr_nu492lkakm1uacq42o1_500.gif", "tumblr_nubj323XCl1rsdpaso1_500.gif", "tumblr_nuf6p8uKX01rsdpaso1_500.gif", "tumblr_numyl3V9Jg1rsdpaso1_500.gif", "tumblr_nuu9gxqLSK1rsdpaso1_500.gif", "tumblr_nv520bzzNg1rsdpaso1_500.gif", "tumblr_nvce1qG41H1rsdpaso1_500.gif", "tumblr_nvec21pNjT1rsdpaso1_500.gif", "tumblr_nvg1pa9o321s52d1io1_500.gif", "tumblr_nvi64gqryb1rsdpaso1_500.gif", "tumblr_nvluwu9weO1rsdpaso1_500.gif", "tumblr_nvyyp7ra9K1rsdpaso1_500.gif", "tumblr_nw65mjCJCp1rsdpaso1_r1_500.gif", "tumblr_nw9v4iJrMf1rsdpaso1_500.gif", "tumblr_nwbwasYYeZ1rsdpaso1_500.gif", "tumblr_nwddtdquWx1rsdpaso1_500.gif", "tumblr_nwqoprOcFc1rsdpaso1_500.gif", "tumblr_nwvx1sa8111rsdpaso1_500.gif", "tumblr_nwwfrs7hs61rsdpaso1_500.gif", "tumblr_nx1lpfXj2A1rsdpaso1_500.gif", "tumblr_nx1xqnvq081rsdpaso1_500.gif", "tumblr_nxemxzFNeP1rsdpaso1_500.gif", "tumblr_nxpqpvQsDw1rsdpaso1_500.gif", "tumblr_nxx4zeO2db1rsdpaso1_1280.gif", "tumblr_ny4jn51Ekr1rsdpaso1_500.gif", "tumblr_ny85ru52GG1rsdpaso1_540.gif", "tumblr_nyfa8tpZPe1rsdpaso1_500.gif", "tumblr_nyfrttiHOc1rsdpaso1_500.gif", "tumblr_nyhrvkFmdV1rsdpaso1_500.gif", "tumblr_nyn1ujLCtt1rsdpaso1_500.gif", "tumblr_nyn8diU8YY1rsdpaso1_500.gif", "tumblr_nyolye7nqA1rsdpaso1_500.gif", "tumblr_nz20levb0a1rsdpaso1_500.gif", "tumblr_nzh40niB9k1rsdpaso1_500.gif", "tumblr_o034jaiwxS1rsdpaso1_500.gif", "tumblr_o08m1jd7yh1rsdpaso1_500.gif", "tumblr_o0g03doT8y1rsdpaso1_500.gif", "tumblr_o0g68vvAuD1rsdpaso1_500.gif", "tumblr_o0qwo8wT3e1rsdpaso1_500.gif", "tumblr_o0so53x1cb1rsdpaso1_500.gif", "tumblr_o0yad6LNha1rsdpaso1_500.gif", "tumblr_o1l1gnbt4c1rsdpaso1_500.gif", "tumblr_o1ot0vyA9S1rsdpaso1_500.gif", "tumblr_o1vu9eDLuo1rsdpaso1_500.gif", "tumblr_o23k625VT51rsdpaso1_500.gif", "tumblr_o259ve9Hjn1rsdpaso1_500.gif", "tumblr_o2ablrKaDf1rsdpaso1_500.gif", "tumblr_o2ce31aUnt1rsdpaso1_500.gif", "tumblr_o2ftppPdnW1rsdpaso1_500.gif", "tumblr_o2p5avDF2h1rsdpaso1_500.gif", "tumblr_o2rjeyah1p1rsdpaso1_500.gif", "tumblr_o2t92i1LhI1rsdpaso1_500.gif" ];
 
 /* START */
+var imgElement = document.getElementById("image");
+var dir = 'images/';
+var image_index = 0;
+var images = img_arr1.concat(img_arr2).concat(img_arr3).concat(img_arr4).concat(img_arr5).concat(img_arr6).concat(img_arr7).concat(img_arr8).concat(img_arr9).concat(img_arr10).concat(img_arr11).concat(img_arr12);
 
 function set_body_height() { // set body height = window height
+    console.log("set body height was called");
     $('body').height($(window).height());
 }
-    
-$(document).ready(function(){
-    var imgElement = document.getElementById("image");
-    var dir = 'images/';
-    var image_index = 0;
-    var images = img_arr1.concat(img_arr2).concat(img_arr3).concat(img_arr4).concat(img_arr5).concat(img_arr6).concat(img_arr7).concat(img_arr8).concat(img_arr9).concat(img_arr10).concat(img_arr11).concat(img_arr12);
 
+function changeImage() {
+    console.log(imgElement.src);
+    console.log("image_index: " + image_index);
+    var rnd = Math.floor(Math.random() * (images.length));
+    console.log("random: " + rnd);
+    var imgsrc = dir + images[rnd];
+    var imgw = preloader(imgsrc).naturalWidth;
+    console.log("WIDTH: " + imgw);
 
-    $(window).bind('resize', set_body_height);
-    set_body_height();
-
-    function changeImage() {
-
-        console.log(imgElement.src);
-        console.log("image_index: " + image_index);
-        var rnd = Math.floor(Math.random() * (images.length));
-        console.log("random: " + rnd);
-        imgElement.src = dir + images[rnd];
-        image_index++;
-        if (image_index >= images.length) {
-            image_index = 0;
-        }
-        set_body_height();
+    imgElement.src = preloader(imgsrc).src;
+    image_index++;
+    if (image_index >= images.length) {
+        image_index = 0;
     }
+}
 
-    setInterval ( function() { changeImage() }, 4000 );
+function preloader(url) {
+    var img = new Image();
+    img.src = url;
+    return img;
+}
+
+function setImageSize() {
+
+    var i = document.getElementById('image');
+    var iw = i.width;
+    var ih = i.height;
+    console.log("image width: "+iw+"; image height: "+ih);
+}
+
+$(document).ready(function(){
+    var w = $(window).width();
+    var h = $(window).height();
+    console.log("width: " + w + "; height: " + h);
+
+
+    //$(window).bind('resize', set_body_height);
+    changeImage();
+    setImageSize();
+
+    setInterval ( function() {
+
+        changeImage();
+        setImageSize();
+
+    }, 4000 );
 
 });
 
